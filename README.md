@@ -35,28 +35,63 @@ Built independently as part of the **HSIL Harvard Health Applications Hackathon 
 ## 🏗️ Architecture
 
 ```
-┌─────────────────────┐        ┌──────────────────────┐
-│   Flutter Frontend  │ ──────▶│   Python/Flask API   │
-│   (Mobile App)      │        │   (Backend Server)   │
-└─────────────────────┘        └──────────┬───────────┘
-                                           │
-                                ┌──────────▼───────────┐
-                                │   ML Pipeline        │
-                                │  ┌────────────────┐  │
-                                │  │ RMT Denoiser   │  │
-                                │  └───────┬────────┘  │
-                                │  ┌───────▼────────┐  │
-                                │  │   Classifier   │  │
-                                │  └───────┬────────┘  │
-                                │  ┌───────▼────────┐  │
-                                │  │  Prediction    │  │
-                                │  └────────────────┘  │
-                                └──────────────────────┘
-                                           │
-                                ┌──────────▼───────────┐
-                                │   Firebase           │
-                                │  (Auth + Database)   │
-                                └──────────────────────┘
+UI Screens
+↓
+State Management (Provider / Riverpod / Bloc)
+↓
+Services Layer
+├─ ai_service.dart          → Python/Flask ML API calls
+├─ database_service.dart    → Firestore real-time DB
+└─ notification_service.dart
+
+↓
+Models
+├─ doctor.dart
+├─ patient.dart
+└─ case.dart
+
+↓
+Cloud Database & Real-time Streams (Firebase)
+↓
+Secure Storage & Encryption
+```
+
+### 📁 Folder Structure
+
+```
+lib/
+├─ main.dart
+├─ screens/
+│   ├─ splash_screen.dart
+│   ├─ login_screen.dart
+│   ├─ main_page.dart
+│   ├─ new_cases_screen.dart
+│   ├─ patient_history_screen.dart
+│   ├─ chat_screen.dart
+│   ├─ ai_recommendations_screen.dart
+│   ├─ analytics_dashboard_screen.dart
+│   └─ settings_screen.dart
+├─ widgets/
+│   ├─ case_card.dart
+│   ├─ ai_card.dart
+│   ├─ chat_bubble.dart
+│   └─ bottom_nav_bar.dart
+├─ models/
+│   ├─ doctor.dart
+│   ├─ patient.dart
+│   └─ case.dart
+├─ providers/
+│   ├─ auth_provider.dart
+│   ├─ chat_provider.dart
+│   ├─ ai_provider.dart
+│   └─ case_provider.dart
+├─ services/
+│   ├─ ai_service.dart
+│   ├─ database_service.dart
+│   └─ notification_service.dart
+└─ utils/
+    ├─ constants.dart
+    └─ theme.dart
 ```
 
 ---
